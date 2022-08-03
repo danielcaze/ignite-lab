@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client"
+import { Event } from "./pages/Event";
 // import { useEffect } from "react"
 // import { client } from "./lib/apollo"
 
@@ -14,7 +15,7 @@ const GET_LESSONS_QUERY = gql`
 interface Lesson {
   id: string;
   title: string;
-}
+};
 
 export function App() {
   // CMS = COntent Management System
@@ -39,10 +40,6 @@ export function App() {
   console.log(data);
 
   return (
-    <ul>
-      {data?.lessons.map(lesson => (
-        <li key={lesson.id}>{lesson.title}</li>
-      ))}
-    </ul>
+    <Event />
   );
 };
