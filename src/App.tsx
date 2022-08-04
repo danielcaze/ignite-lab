@@ -1,21 +1,7 @@
-import { gql, useQuery } from "@apollo/client"
-import { Event } from "./pages/Event";
-// import { useEffect } from "react"
-// import { client } from "./lib/apollo"
-
-const GET_LESSONS_QUERY = gql`
-  query {
-    lessons {
-      id
-      title
-    }
-  }
-`;
-
-interface Lesson {
-  id: string;
-  title: string;
-};
+import { ApolloProvider, gql, useQuery } from "@apollo/client"
+import { BrowserRouter } from "react-router-dom";
+import { client } from "./lib/apollo";
+import { Router } from './Router'
 
 export function App() {
   // CMS = COntent Management System
@@ -28,18 +14,11 @@ export function App() {
   // mutation = criar, alterar ou deletar dados
   // underfetching e overfetching (back retornar mais ou menos dados do que o necessário)
 
-  // useEffect(() => {
-  //   client.query({
-  //     query: GET_LESSONS_QUERY,
-  //   }).then(response => {
-  //     console.log(response.data);
-  //   });
-  // }, []);
-
-  const { data } = useQuery<{ lessons: Lesson[] }>(GET_LESSONS_QUERY);
-  console.log(data);
-
   return (
-    <Event />
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ApolloProvider>
   );
 };
